@@ -8,5 +8,7 @@ namespace GameInsightsApp.Models.Entities
         public string Name { get; set; }
 
         public ICollection<Player> Players { get; set; }
+
+        public ICollection<Game> Games { get; set; }
     }
 }
