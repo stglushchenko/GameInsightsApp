@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace GameInsightsApp.Models.Entities
 {
@@ -9,6 +10,7 @@ namespace GameInsightsApp.Models.Entities
 
         public ICollection<Player> Players { get; set; }
 
+        [JsonIgnore]
         public ICollection<Game> Games { get; set; }
     }
 }
