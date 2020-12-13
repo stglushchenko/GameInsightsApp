@@ -1,0 +1,8 @@
+<h1 id="tableLabel">Games</h1>
+
+<p *ngIf="!games"><em>Loading...</em></p>
+<ul *ngIf="games">
+  <li *ngFor="let game of games" (click)="onSelect(game)">
+    {{game.name}}
+  </li>
+</ul>
