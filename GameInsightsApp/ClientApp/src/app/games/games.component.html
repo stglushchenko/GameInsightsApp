@@ -1,8 +1,8 @@
 <h1 id="tableLabel">Games</h1>
 
 <p *ngIf="!games"><em>Loading...</em></p>
-<ul *ngIf="games">
-  <li *ngFor="let game of games" (click)="onSelect(game)">
-    {{game.name}}
+<ul *ngIf="games" class="list-group">
+  <li *ngFor="let game of games" class="list-group-item"(click)="onSelect(game)">
+    <a [routerLink]="['/games', game.id]">{{game.name}}</a>
   </li>
 </ul>

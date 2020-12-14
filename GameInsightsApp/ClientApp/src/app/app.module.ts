@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { GamesComponent } from './games/games.component';
+import { GameEventsComponent } from './game-events/game-events.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { GamesComponent } from './games/games.component';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    GamesComponent
+    GamesComponent,
+    GameEventsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -26,6 +28,7 @@ import { GamesComponent } from './games/games.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'games', component: GamesComponent },
+      { path: 'games/:id', component: GameEventsComponent },
     ])
   ],
   providers: [],
