@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { GameService } from './../services/game.service';
+import { Component } from '@angular/core';
 import { Game } from "../models/game";
 
 @Component({
@@ -8,15 +8,21 @@ import { Game } from "../models/game";
 })
 export class GamesComponent {
   public games: Game[];
+  public error: any;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Game[]>(baseUrl + 'games').subscribe(result => {
+  constructor(gameService: GameService) {
+    gameService.getAll().subscribe(result => {
       this.games = result;
-    }, error => console.error(error));
+    }, error => this.onError(error))
   }
 
-  onSelect(game: Game) {
-    console.log(game);
+  onError(error: any){
+    console.error(error)
+    this.error = error;
+  }
+
+  gameDescription(game: Game): string{
+    return `Teams: ${game.teams.map(x => `${x.name}(${x.players.length} players)`).join(', ')}`;
   }
 }
 

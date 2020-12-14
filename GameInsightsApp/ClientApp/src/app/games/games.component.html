@@ -1,8 +1,11 @@
 <h1 id="tableLabel">Games</h1>
 
-<p *ngIf="!games"><em>Loading...</em></p>
+<p *ngIf="!games && !error"><em>Loading...</em></p>
+<p *ngIf="error"><em>Error loading games, please contact support...</em></p>
 <ul *ngIf="games" class="list-group">
-  <li *ngFor="let game of games" class="list-group-item"(click)="onSelect(game)">
+  <li *ngFor="let game of games" class="list-group-item">
     <a [routerLink]="['/games', game.id]">{{game.name}}</a>
+    <br>
+    <a>{{gameDescription(game)}}</a>
   </li>
 </ul>
