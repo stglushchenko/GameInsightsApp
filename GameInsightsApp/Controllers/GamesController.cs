@@ -33,5 +33,15 @@ namespace GameInsightsApp.Controllers
                 .AsNoTracking()
                 .ToArrayAsync();
         }
+
+        [HttpGet("{id}")]
+        public async Task<Game> Get(int id)
+        {
+            return await context.Games
+                .Include(x => x.Teams)
+                .ThenInclude(x => x.Players)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }
