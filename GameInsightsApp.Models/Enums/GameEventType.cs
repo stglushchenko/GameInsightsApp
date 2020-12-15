@@ -2,7 +2,7 @@
 {
     public enum GameEventType
     {
-        CapturedTheFlag,
+        CapturedTheFlag = 0,
         FlagPickedUp,
         LostTheFlag,
         FlagInterceptedByAnotherTeam,

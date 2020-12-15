@@ -1,8 +1,8 @@
-import { GameService } from './../services/game.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Game } from '../models';
+import { Game, GameEvent } from '../models';
+import { GameEventService, GameService } from '../services';
 
 @Component({
   selector: 'app-game',
@@ -11,14 +11,16 @@ import { Game } from '../models';
 })
 export class GameEventsComponent implements OnInit {
   gameId: number;
-  game$: Observable<Game>;
+  game: Game;
+  gameEvents$: Observable<GameEvent[]>;
 
-  constructor(private route: ActivatedRoute, private gameService: GameService) { }
+  constructor(private route: ActivatedRoute, private gameService: GameService, private gameEventService: GameEventService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.gameId = +params.get('id');
-      this.game$ = this.gameService.get(this.gameId);
+      this.gameService.get(this.gameId).subscribe(x => this.game = x);
+      //this.gameEvents$ = this.gameEventService.getAll(this.gameId);
     });
   }
 

@@ -13,11 +13,11 @@ export class GamesComponent {
   constructor(gameService: GameService) {
     gameService.getAll().subscribe(result => {
       this.games = result;
-    }, error => this.onError(error))
+    }, error => this.onError(error));
   }
 
-  onError(error: any){
-    console.error(error)
+  onError(error: any) {
+    console.error(error);
     this.error = error;
   }
 

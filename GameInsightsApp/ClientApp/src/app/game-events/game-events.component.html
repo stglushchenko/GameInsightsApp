@@ -1,1 +1,6 @@
-{{game$ | async | json}}
+<div *ngIf="game">
+    {{game.name}}
+    Spectator: {{game.spectatorEmployeeName}}
+    <button routerLink="event/new">Add new event</button>
+    <router-outlet ></router-outlet>
+</div>

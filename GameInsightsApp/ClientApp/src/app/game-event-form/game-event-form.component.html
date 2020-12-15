@@ -1,0 +1,56 @@
+<form *ngIf="gameEventForm" [formGroup]="gameEventForm" (ngSubmit)="onSubmit()">
+    <!-- <label>
+      Game:
+      <input type="text" formControlName="gameId" required>
+    </label> -->
+  
+    <label>
+      Team:
+      <select formControlName="teamId">
+        <option *ngFor="let team of game.teams" [ngValue]="team.id">
+          {{ team.name }}
+        </option>
+      </select>
+    </label>
+
+    <label>
+      Player:
+      <select formControlName="playerId">
+        <option *ngFor="let player of selectedTeamPlayers$ | async" [ngValue]="player.id">
+          {{ player.name }}
+        </option>
+      </select>
+    </label>
+  
+    <label>
+      Event Type:
+      <select formControlName="gameEventType">
+        <option *ngFor="let eventType of eventTypes" [ngValue]="eventType.type">
+          {{ eventType.name }}
+        </option>
+      </select>
+    </label>
+
+    <label>
+      Notes:
+      <input type="text" formControlName="notes">
+    </label>
+
+    <button type="submit" [disabled]="!gameEventForm.valid">Submit</button>
+  </form>
+  
+  <hr>
+  
+  
+  <p>
+    Form Value: {{ gameEventForm.value | json }}
+  </p>
+  
+  
+  <p>
+    Form Status: {{ gameEventForm.status }}
+  </p>
+  
+  <p>
+    <button (click)="updateProfile()">Update Game Event</button>
+  </p>

@@ -21,11 +21,11 @@ namespace GameInsightsApp.Controllers
             this.context = context;
         }
 
-        // GET: api/GameEvents
+        // GET: api/GameEvents?gameId=5
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GameEvent>>> GetGameEvents()
+        public async Task<ActionResult<IEnumerable<GameEvent>>> GetGameEvents(int gameId)
         {
-            return await context.GameEvents.ToListAsync();
+            return await context.GameEvents.Where(x => x.GameId == gameId).ToListAsync();
         }
 
         // GET: api/GameEvents/5
