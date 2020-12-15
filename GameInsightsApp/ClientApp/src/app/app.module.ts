@@ -40,10 +40,8 @@ const services = [
       { path: 'games', component: GamesComponent },
       { path: 'games/:id', component: GameEventsComponent,
         children: [
-          {
-            path: 'event/new',
-            component: GameEventFormComponent,
-          },
+          { path: 'event/new', component: GameEventFormComponent,},
+          { path: 'event/:id', component: GameEventFormComponent,},
         ],
       },
     ])

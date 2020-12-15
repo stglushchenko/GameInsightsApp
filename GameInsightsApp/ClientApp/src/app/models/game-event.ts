@@ -3,7 +3,7 @@ export interface GameEvent {
   gameId: number;
   playerId?: number;
   teamId?: number;
-  gameEventType: GameEventType;
+  eventType: GameEventType;
   notes: string;
 }
 

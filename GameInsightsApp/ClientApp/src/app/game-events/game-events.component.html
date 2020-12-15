@@ -1,6 +1,17 @@
 <div *ngIf="game">
-    {{game.name}}
-    Spectator: {{game.spectatorEmployeeName}}
-    <button routerLink="event/new">Add new event</button>
+    <a>{{game.name}}</a>
+    <br>
+    <a>Spectator: {{game.spectatorEmployeeName}}</a>
+    <br>
     <router-outlet ></router-outlet>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <a routerLink="event/new">Add new event</a>
+      </li>
+      <li *ngFor="let gameEvent of gameEvents$ | async" class="list-group-item">
+        <a [routerLink]="['event', gameEvent.id]">{{getDescription(gameEvent)}}</a>
+        <br>
+        <a>player:{{gameEvent.playerId}}</a>
+      </li>
+    </ul>
 </div>
