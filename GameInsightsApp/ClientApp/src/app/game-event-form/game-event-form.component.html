@@ -1,51 +1,46 @@
+<hr>
+
 <div *ngIf="gameEventForm">
   <form  [formGroup]="gameEventForm" (ngSubmit)="onSubmit()">
-    <label>
-      Team:
-      <select formControlName="teamId">
-        <option *ngFor="let team of game.teams" [ngValue]="team.id">
-          {{ team.name }}
-        </option>
-      </select>
-    </label>
-
-    <label>
-      Player:
-      <select formControlName="playerId">
-        <option *ngFor="let player of selectedTeamPlayers" [ngValue]="player.id">
-          {{ player.name }}
-        </option>
-      </select>
-    </label>
-  
-    <label>
-      Event Type:
-      <select formControlName="eventType">
+    <div class="form-group">
+      <label>Event Type:</label>
+      <select id="selectType" class="form-control" formControlName="eventType">
         <option *ngFor="let eventType of eventTypes" [ngValue]="eventType.type">
           {{ eventType.name }}
         </option>
       </select>
-    </label>
-
-    <label>
-      Notes:
-      <input type="text" formControlName="notes">
-    </label>
-    
+    </div>
+    <div class="form-group">
+      <label for="selectTeam">Team:</label>
+      <select id="selectTeam" class="form-control" formControlName="teamId">
+        <option *ngFor="let team of game.teams" [ngValue]="team.id">
+          {{ team.name }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="selectPlayer">Player:</label>
+      <select id="selectPlayer" class="form-control" formControlName="playerId">
+        <option *ngFor="let player of selectedTeamPlayers" [ngValue]="player.id">
+          {{ player.name }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="textAreaNotes">Notes:</label>
+      <textarea  id="textAreaNotes" class="form-control" formControlName="notes" rows="2"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!gameEventForm.valid">Save</button>
   </form>
   
   <hr>
   
-  <p>
+  <!-- <p>
     Form Value: {{ gameEventForm.value | json }}
   </p>
   
   <p>
     Form Status: {{ gameEventForm.status }}
-  </p>
-  
-  <p>
-    <button type="submit" [disabled]="!gameEventForm.valid">Save</button>
-  </p>
+  </p> -->
 
 </div>

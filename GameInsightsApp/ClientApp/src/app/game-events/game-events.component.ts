@@ -14,6 +14,7 @@ export class GameEventsComponent implements OnInit {
   game: Game;
   gameEvents$: Observable<GameEvent[]>;
   GameEventType = GameEventType;
+  selectedEvent?: number;
 
   constructor(private route: ActivatedRoute, private gameService: GameService, private gameEventService: GameEventService) { }
 
@@ -28,6 +29,10 @@ export class GameEventsComponent implements OnInit {
   getDescription(gameEvent: GameEvent) {
     console.log(GameEventType[gameEvent.eventType]);
     return GameEventType[gameEvent.eventType];
+  }
+
+  selectEvent(eventId?: number){
+    this.selectedEvent = eventId;
   }
 
 }

@@ -2,10 +2,13 @@
 
 <p *ngIf="!games && !error"><em>Loading...</em></p>
 <p *ngIf="error"><em>Error loading games, please contact support...</em></p>
-<ul *ngIf="games" class="list-group">
-  <li *ngFor="let game of games" class="list-group-item">
-    <a [routerLink]="['/games', game.id]">{{game.name}}</a>
-    <br>
-    <a>{{gameDescription(game)}}</a>
-  </li>
-</ul>
+<div *ngIf="games" class="list-group">
+  <a *ngFor="let game of games" class="list-group-item list-group-item-action" [routerLink]="['/games', game.id]">
+    <div class="d-flex justify-content-between">
+      <h5 class="mb-1">{{game.name}}</h5>
+      <small>todo: bind to when game happened</small>
+    </div>
+    <p class="mb-1">{{gameDescription(game)}}</p>
+    <!-- <small>Donec id elit non mi porta.</small> -->
+  </a>
+</div>

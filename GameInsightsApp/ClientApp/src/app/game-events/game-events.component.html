@@ -5,13 +5,23 @@
     <br>
     <router-outlet ></router-outlet>
     <ul class="list-group">
-      <li class="list-group-item">
-        <a routerLink="event/new">Add new event</a>
-      </li>
-      <li *ngFor="let gameEvent of gameEvents$ | async" class="list-group-item">
-        <a [routerLink]="['event', gameEvent.id]">{{getDescription(gameEvent)}}</a>
-        <br>
-        <a>player:{{gameEvent.playerId}}</a>
-      </li>
+      <a class="list-group-item list-group-item-primary" routerLink="event/new" (click)="selectEvent(null)">
+        <div>
+          <h6 class="mb-1">Add new event</h6>
+        </div>
+      </a>
+      <a *ngFor="let gameEvent of gameEvents$ | async" 
+          [routerLink]="['event', gameEvent.id]" 
+          (click)="selectEvent(gameEvent.id)"
+          class="list-group-item list-group-item-action"
+          [class.active]="gameEvent.id === selectedEvent"
+        >
+        <div class="d-flex justify-content-between">
+          <h6 class="mb-1">{{getDescription(gameEvent)}}</h6>
+          <small>todo: bind to when event happened</small>
+        </div>
+        <p class="mb-1">player:{{gameEvent.playerId}}</p>
+        <small>team: {{gameEvent.teamId}}</small>
+      </a>
     </ul>
 </div>
