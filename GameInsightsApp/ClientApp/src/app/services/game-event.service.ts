@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { GameEvent } from '../models';
 
 export class GameEventService {
     readonly url = 'api/gameevents';
+    private eventListChangedSource = new Subject<void>();
+    eventListChanged$ = this.eventListChangedSource.asObservable();
 
     constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
 
@@ -19,15 +22,15 @@ export class GameEventService {
     }
 
     public put(gameEvent: GameEvent) {
-        return this.http.put(this.urlById(gameEvent.id), gameEvent);
+        return this.http.put(this.urlById(gameEvent.id), gameEvent).pipe(tap(_ => this.eventListChangedSource.next()));;
     }
 
     public post(gameEvent: GameEvent) {
-        return this.http.post(this.baseUrl + this.url, gameEvent);
+        return this.http.post(this.baseUrl + this.url, gameEvent).pipe(tap(_ => this.eventListChangedSource.next()));
     }
 
     public delete(id: number) {
-        return this.http.delete(this.urlById(id));
+        return this.http.delete(this.urlById(id)).pipe(tap(_ => this.eventListChangedSource.next()));;
     }
 
     private urlById(id: number) {

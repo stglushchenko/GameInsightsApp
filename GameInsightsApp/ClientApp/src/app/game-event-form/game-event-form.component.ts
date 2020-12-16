@@ -5,7 +5,7 @@ import { Form, FormArray, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Game, GameEvent, GameEventType, Player } from '../models';
 import { skipUntil, skipWhile, take, takeUntil, tap, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Subject, Observable, of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-event-form',
@@ -31,7 +31,8 @@ export class GameEventFormComponent implements OnDestroy {
   constructor(private fb: FormBuilder,
     gameService: GameService,
     private gameEventService: GameEventService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
 
     this.route.paramMap.pipe(
       map(params => +params.get('id')),
@@ -107,9 +108,9 @@ export class GameEventFormComponent implements OnDestroy {
     // TODO: Use EventEmitter with form value
     console.warn(this.gameEventForm.value);
     if (this.gameEventForm.value.id > 0) {
-      this.gameEventService.put(this.gameEventForm.value).subscribe();
+      this.gameEventService.put(this.gameEventForm.value).subscribe(_ => this.router.navigate(['../../'], {relativeTo: this.route}));
     } else {
-      this.gameEventService.post(this.gameEventForm.value).subscribe();
+      this.gameEventService.post(this.gameEventForm.value).subscribe(_ => this.router.navigate(['../../'], {relativeTo: this.route}));
     }
   }
 

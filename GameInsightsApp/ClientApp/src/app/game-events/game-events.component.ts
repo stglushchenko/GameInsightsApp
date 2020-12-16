@@ -1,8 +1,9 @@
-import { Observable } from 'rxjs';
+import { empty, merge, Observable, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game, GameEvent, GameEventType } from '../models';
 import { GameEventService, GameService } from '../services';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-game',
@@ -23,11 +24,15 @@ export class GameEventsComponent implements OnInit {
       this.gameId = +params.get('id');
       this.gameService.get(this.gameId).subscribe(x => this.game = x);
       this.gameEvents$ = this.gameEventService.getAll(this.gameId);
+
+      // TODO: figure out how to make gameEvents$ call BE on init and when eventListChanged$
+      // this.gameEvents$ = merge(of(), this.gameEventService.eventListChanged$).pipe(
+      //   switchMap(() => this.gameEventService.getAll(this.gameId))
+      // );
     });
   }
 
   getDescription(gameEvent: GameEvent) {
-    console.log(GameEventType[gameEvent.eventType]);
     return GameEventType[gameEvent.eventType];
   }
 

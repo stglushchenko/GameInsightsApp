@@ -9,7 +9,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 import { GamesComponent } from './games/games.component';
 import { GameEventsComponent } from './game-events/game-events.component';
 import { GameEventFormComponent } from './game-event-form/game-event-form.component';
@@ -24,7 +23,6 @@ const services = [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
     GamesComponent,
     GameEventsComponent,
     GameEventFormComponent
@@ -36,7 +34,6 @@ const services = [
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
       { path: 'games', component: GamesComponent },
       { path: 'games/:id', component: GameEventsComponent,
         children: [
